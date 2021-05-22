@@ -1,18 +1,15 @@
 package io.github.seggan.addontemplate;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Nonnull;
 
 import io.github.mooy1.infinitylib.AbstractAddon;
 import io.github.mooy1.infinitylib.bstats.bukkit.Metrics;
-import io.github.mooy1.infinitylib.commands.AbstractCommand;
 
-public final class AddonTemplate extends AbstractAddon {
+public final class EMC2 extends AbstractAddon {
     
-    private static AddonTemplate instance;
+    private static EMC2 instance;
     
-    public static AddonTemplate inst() {
+    public static EMC2 inst() {
         return instance;
     }
     
