@@ -1,0 +1,14 @@
+name: AddonTemplate
+author: Mooy1
+description: Addon Template
+main: io.github.mooy1.addontemplate.AddonTemplate
+website: https://github.com/Mooy1/AddonTemplate
+depend: [Slimefun]
+version: ${project.version}
+api-version: 1.16
+
+commands:
+  addontemplate:
+    description: Do /addontemplate help for a list of commands
+    usage: /addontemplate <subcommand>
+    aliases: [at]
