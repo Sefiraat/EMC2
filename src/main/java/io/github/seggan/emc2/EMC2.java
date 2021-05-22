@@ -1,4 +1,4 @@
-package io.github.seggan.addontemplate;
+package io.github.seggan.emc2;
 
 import javax.annotation.Nonnull;
 
@@ -9,14 +9,12 @@ public final class EMC2 extends AbstractAddon {
     
     private static EMC2 instance;
     
-    public static EMC2 inst() {
-        return instance;
-    }
-    
     @Override
     public void onEnable() {
         instance = this;
         super.onEnable();
+
+        ItemValues.setup();
     }
 
     @Override
@@ -34,5 +32,8 @@ public final class EMC2 extends AbstractAddon {
     public void onDisable() {
         instance = null;
     }
-    
+
+    public static EMC2 inst() {
+        return instance;
+    }
 }
