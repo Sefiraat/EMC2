@@ -4,17 +4,32 @@ import javax.annotation.Nonnull;
 
 import io.github.mooy1.infinitylib.AbstractAddon;
 import io.github.mooy1.infinitylib.bstats.bukkit.Metrics;
+import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.java.JavaPluginLoader;
+
+import java.io.File;
 
 public final class EMC2 extends AbstractAddon {
     
     private static EMC2 instance;
-    
+
+    public EMC2() {
+    }
+
+    public EMC2(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
+        super(loader, description, dataFolder, file);
+    }
+
     @Override
     public void onEnable() {
         instance = this;
         super.onEnable();
 
-        ItemValues.setup();
+        if (SlimefunPlugin.getMinecraftVersion() != MinecraftVersion.UNIT_TEST) {
+            ItemValues.getInstance().getBaseMaterials().forEach(System.out::println);
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package io.github.seggan.emc2;
 
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.FurnaceRecipe;
@@ -17,14 +18,18 @@ import java.util.Set;
 
 public class ItemValues {
 
-    private static final ItemValues INSTANCE = new ItemValues();
+    private static ItemValues INSTANCE = null;
 
-    private final Set<Material> baseMaterials = EnumSet.noneOf(Material.class);
+    @Getter
+    private final Set<Material> baseMaterials = EnumSet.noneOf(Material.class); // package private for tests
 
     private ItemValues() {
         for (Material material : Material.values()) {
+            if (material.name().startsWith("LEGACY_")) continue;
+
             baseMaterials.addAll(getBaseMaterials(new ItemStack(material)));
         }
+        baseMaterials.removeIf(Material::isAir);
     }
 
     @Nonnull
@@ -61,10 +66,11 @@ public class ItemValues {
 
     @Nonnull
     public static ItemValues getInstance() {
-        return INSTANCE;
-    }
+        // lazy init for unit testing purposes
+        if (INSTANCE == null) {
+            INSTANCE = new ItemValues();
+        }
 
-    // does nothing, simply forces creation of the INSTANCE field
-    public static void setup() {
+        return INSTANCE;
     }
 }

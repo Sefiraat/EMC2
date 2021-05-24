@@ -17,17 +17,18 @@ import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class EinsteinsTable extends AbstractContainer {
+public class EinsteinsWorkbench extends AbstractContainer {
 
     private static final int[] BACKGROUND = new int[]{0, 1, 2, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 20, 24, 26, 27, 28, 29, 33, 34, 35, 36, 37, 38, 42, 43, 44, 45, 46, 47, 51, 52, 53};
     private static final int[] INPUT_SLOTS = new int[]{3, 5, 12, 14, 21, 22, 23};
-    private static final int[] OUTPUT_SLOTS = new int[]{30, 31, 32, 39, 41, 48, 49, 50};
+    private static final int[] OUTPUT_SLOTS = new int[]{30, 32, 39, 41, 48, 49, 50};
 
     private static final int ENABLED_SLOT = 19;
     private static final int AMOUNT_SLOT = 25;
 
     private static final int COPY_SLOT = 13;
     private static final int ITEM_SLOT = 40;
+    private static final int MODE_SLOT = 31;
 
     private static final ItemStack ENABLED_ITEM = new CustomItem(
         Material.STRUCTURE_VOID,
@@ -53,7 +54,7 @@ public class EinsteinsTable extends AbstractContainer {
         "&fAmount: 0 EGM"
     );
 
-    public EinsteinsTable(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public EinsteinsWorkbench(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
     }
 
