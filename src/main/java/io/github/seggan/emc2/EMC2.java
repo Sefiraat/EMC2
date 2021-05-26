@@ -26,10 +26,6 @@ public final class EMC2 extends AbstractAddon {
     public void onEnable() {
         instance = this;
         super.onEnable();
-
-        if (SlimefunPlugin.getMinecraftVersion() != MinecraftVersion.UNIT_TEST) {
-            ItemValues.getInstance().getBaseMaterials().forEach(System.out::println);
-        }
     }
 
     @Override
