@@ -2,7 +2,6 @@ package io.github.seggan.emc2;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
-import com.google.common.collect.Sets;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import org.bukkit.Material;
@@ -19,20 +18,6 @@ public class TestMaterials {
     private static SlimefunPlugin slimefun;
     private static EMC2 emc2;
 
-    private static final Set<String> INVALID_IETMS = Sets.newHashSet(
-        "WALL_",
-        "_PLANT",
-        "WATER",
-        "LAVA",
-        "FIRE",
-        "PISTON",
-        "ATTACHED_",
-        "_FIRE",
-        "_COLUMN",
-        "COMMAND_BLOCK",
-        "DEBUG_STICK"
-    );
-
     @BeforeAll
     public static void setUp() {
         server = MockBukkit.mock();
@@ -46,7 +31,7 @@ public class TestMaterials {
         Set<Material> missing = EnumSet.noneOf(Material.class);
 
         for (Material material : Material.values()) {
-            if (!items.contains(material) && !material.name().startsWith("LEGACY_")) {
+            if (!items.contains(material) && !material.name().startsWith("LEGACY_") && material.isItem()) {
                 missing.add(material);
             }
         }
@@ -54,13 +39,7 @@ public class TestMaterials {
         missing.removeIf(SlimefunTag.UNBREAKABLE_MATERIALS::isTagged);
         missing.removeIf(SlimefunTag.SPAWN_EGGS::isTagged);
         missing.removeIf(Material::isAir);
-        missing.removeIf(m -> {
-            for (String s : INVALID_IETMS) {
-                if (m.name().contains(s)) return true;
-            }
-
-            return false;
-        });
+        missing.remove(Material.DEBUG_STICK);
 
         if (!missing.isEmpty()) {
             missing.forEach(System.out::println);
