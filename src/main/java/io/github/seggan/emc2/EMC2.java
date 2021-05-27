@@ -1,14 +1,14 @@
 package io.github.seggan.emc2;
 
-import javax.annotation.Nonnull;
-
 import io.github.mooy1.infinitylib.AbstractAddon;
 import io.github.mooy1.infinitylib.bstats.bukkit.Metrics;
+import io.github.seggan.emc2.qgp.ItemValues;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPluginLoader;
 
+import javax.annotation.Nonnull;
 import java.io.File;
 
 public final class EMC2 extends AbstractAddon {
@@ -26,6 +26,10 @@ public final class EMC2 extends AbstractAddon {
     public void onEnable() {
         instance = this;
         super.onEnable();
+
+        if (SlimefunPlugin.getMinecraftVersion() != MinecraftVersion.UNIT_TEST) {
+            ItemValues.setup();
+        }
     }
 
     @Override

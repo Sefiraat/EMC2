@@ -2,6 +2,7 @@ package io.github.seggan.emc2;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
+import io.github.seggan.emc2.qgp.ItemValues;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import org.bukkit.Material;

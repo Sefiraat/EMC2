@@ -1,9 +1,11 @@
-package io.github.seggan.emc2;
+package io.github.seggan.emc2.qgp;
 
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import lombok.Getter;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.bukkit.Material;
 import org.bukkit.Tag;
+import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
@@ -249,7 +251,23 @@ public class ItemValues {
     }
 
     // does nothing, forces init of static field
-    static void setup() {
+    public static void setup() {
+    }
+
+    public long getValue(ItemStack stack) {
+        SlimefunItem slimefunItem = SlimefunItem.getByItem(stack);
+        if (slimefunItem != null) {
+            Map<ItemStack, Long> calc = Calculator.calculate(slimefunItem, stack.getAmount());
+            for (ItemStack i : calc.keySet()) {
+                if (SlimefunItem.getByItem(i) == null) {
+                    calc.put(i, values.getOrDefault(i.getType(), 0L) * calc.get(i));
+                }
+            }
+
+            return calc.values().stream().mapToLong(Long::longValue).sum();
+        } else {
+            return values.getOrDefault(stack.getType(), 0L) * stack.getAmount();
+        }
     }
 
     private void add(long amount, Material... materials) {
