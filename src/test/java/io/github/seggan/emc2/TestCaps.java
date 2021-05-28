@@ -84,6 +84,10 @@ public class TestCaps {
 
             Assertions.assertEquals(3, Capacitor.removeAmong(center, 3));
             Assertions.assertEquals(1, Capacitor.removeAmong(center, 3));
+
+            Capacitor.distributeAmong(center, 5);
+            Assertions.assertEquals(2, Capacitor.get(cap1));
+            Assertions.assertEquals(3, Capacitor.get(cap2));
         }
     }
 }

@@ -80,7 +80,8 @@ public class Capacitor extends SlimefunItem {
     private static long distributeAmong(@Nonnull List<Block> blocks, long amount) {
         if (blocks.isEmpty()) return amount;
 
-        long splitAmount = Math.round((double) amount / blocks.size());
+        long splitAmount = amount / blocks.size();
+        long extra = amount % blocks.size();
         long overflow = 0;
 
         Iterator<Block> iterator = blocks.iterator();
@@ -97,9 +98,20 @@ public class Capacitor extends SlimefunItem {
                 Capacitor.set(b, capacity);
                 overflow += newAmount - capacity;
             } else {
-                Capacitor.set(b, newAmount);
+                long adjustedAmount = newAmount;
+                if (extra > 0) {
+                    adjustedAmount += extra;
+                }
+                if (adjustedAmount > capacity) {
+                    Capacitor.set(b, capacity);
+                } else {
+                    extra = 0;
+                    Capacitor.set(b, adjustedAmount);
+                }
             }
         }
+
+        overflow += extra;
 
         if (overflow == 0) return 0;
 
