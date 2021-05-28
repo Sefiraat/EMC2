@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Capacitor extends SlimefunItem {
+public class QGPCapacitor extends SlimefunItem {
 
     private static final String BLOCK_STORAGE_KEY = "qgp";
 
-    private static final BlockFace[] ADJACENT_BLOCK_FACES = new BlockFace[]{
+    public static final BlockFace[] ADJACENT_BLOCK_FACES = new BlockFace[]{
         BlockFace.UP,
         BlockFace.DOWN,
         BlockFace.NORTH,
@@ -31,7 +31,7 @@ public class Capacitor extends SlimefunItem {
     @Getter
     private final long capacity;
 
-    public Capacitor(SlimefunItemStack item, ItemStack[] recipe, long capacity) {
+    public QGPCapacitor(SlimefunItemStack item, ItemStack[] recipe, long capacity) {
         super(Items.CATEGORY, item, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
         this.capacity = capacity;
     }
@@ -39,7 +39,7 @@ public class Capacitor extends SlimefunItem {
     public static long get(@Nonnull Block b) {
         String s = BlockStorage.getLocationInfo(b.getLocation(), BLOCK_STORAGE_KEY);
         if (s == null) {
-            BlockStorage.addBlockInfo(b, BLOCK_STORAGE_KEY, "0");
+            BlockStorage.addBlockInfo(b, BLOCK_STORAGE_KEY, Long.toString(0));
             return 0;
         }
 
@@ -51,10 +51,10 @@ public class Capacitor extends SlimefunItem {
     }
 
     public void add(@Nonnull Block b, long amount) {
-        long initialAmount = Capacitor.get(b);
+        long initialAmount = QGPCapacitor.get(b);
         long newAmount = amount + initialAmount;
         newAmount = Math.min(0, Math.max(newAmount, capacity));
-        Capacitor.set(b, newAmount);
+        QGPCapacitor.set(b, newAmount);
     }
 
     /**
@@ -69,7 +69,7 @@ public class Capacitor extends SlimefunItem {
         List<Block> caps = new ArrayList<>();
         for (BlockFace face : ADJACENT_BLOCK_FACES) {
             Block b = sourceBlock.getRelative(face);
-            if (BlockStorage.check(b) instanceof Capacitor) {
+            if (BlockStorage.check(b) instanceof QGPCapacitor) {
                 caps.add(b);
             }
         }
@@ -87,15 +87,15 @@ public class Capacitor extends SlimefunItem {
         Iterator<Block> iterator = blocks.iterator();
         while (iterator.hasNext()) {
             Block b = iterator.next();
-            Capacitor capacitor = (Capacitor) BlockStorage.check(b); // guaranteed cast
+            QGPCapacitor capacitor = (QGPCapacitor) BlockStorage.check(b); // guaranteed cast
             assert capacitor != null; // will not fail
             long capacity = capacitor.getCapacity();
 
-            long storedAmount = Capacitor.get(b);
+            long storedAmount = QGPCapacitor.get(b);
             long newAmount = storedAmount + splitAmount;
             if (newAmount > capacity) {
                 iterator.remove();
-                Capacitor.set(b, capacity);
+                QGPCapacitor.set(b, capacity);
                 overflow += newAmount - capacity;
             } else {
                 long adjustedAmount = newAmount;
@@ -103,10 +103,10 @@ public class Capacitor extends SlimefunItem {
                     adjustedAmount += extra;
                 }
                 if (adjustedAmount > capacity) {
-                    Capacitor.set(b, capacity);
+                    QGPCapacitor.set(b, capacity);
                 } else {
                     extra = 0;
-                    Capacitor.set(b, adjustedAmount);
+                    QGPCapacitor.set(b, adjustedAmount);
                 }
             }
         }
@@ -130,7 +130,7 @@ public class Capacitor extends SlimefunItem {
         List<Block> caps = new ArrayList<>();
         for (BlockFace face : ADJACENT_BLOCK_FACES) {
             Block b = sourceBlock.getRelative(face);
-            if (BlockStorage.check(b) instanceof Capacitor) {
+            if (BlockStorage.check(b) instanceof QGPCapacitor) {
                 caps.add(b);
             }
         }
@@ -149,11 +149,11 @@ public class Capacitor extends SlimefunItem {
         while (iterator.hasNext()) {
             Block b = iterator.next();
 
-            long newAmount = Capacitor.get(b) - splitAmount;
+            long newAmount = QGPCapacitor.get(b) - splitAmount;
 
             if (newAmount < 0) {
                 iterator.remove();
-                Capacitor.set(b, 0);
+                QGPCapacitor.set(b, 0);
                 underflow += -newAmount;
             } else {
                 long adjustedAmount = newAmount;
@@ -161,10 +161,10 @@ public class Capacitor extends SlimefunItem {
                     adjustedAmount -= extra;
                 }
                 if (adjustedAmount < 0) {
-                    Capacitor.set(b, newAmount);
+                    QGPCapacitor.set(b, newAmount);
                 } else {
                     extra = 0;
-                    Capacitor.set(b, adjustedAmount);
+                    QGPCapacitor.set(b, adjustedAmount);
                 }
             }
         }

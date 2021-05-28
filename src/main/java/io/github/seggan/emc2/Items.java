@@ -21,4 +21,38 @@ public class Items {
         "",
         "&6Stores 1,000 Quark-Gluon Plasma"
     );
+
+    public static final SlimefunItemStack MEDIUM_CAPACITOR = new SlimefunItemStack(
+        "MEDIUM_QGP_CAPACITOR",
+        Material.QUARTZ_BLOCK,
+        "&fMedium QGP Capacitor",
+        "",
+        "&6Stores 50,000 Quark-Gluon Plasma"
+    );
+
+    public static final SlimefunItemStack LARGE_CAPACITOR = new SlimefunItemStack(
+        "LARGE_QGP_CAPACITOR",
+        Material.QUARTZ_BLOCK,
+        "&fLarge QGP Capacitor",
+        "",
+        "&6Stores 2,500,000 Quark-Gluon Plasma"
+    );
+
+    public static final SlimefunItemStack DEMATERIALIZER = new SlimefunItemStack(
+        "DEMATERIALIZER",
+        Material.QUARTZ_BRICKS,
+        "&fDematerializer",
+        "",
+        "&7Disintegrates items into Quark-Gluon Plasma"
+    );
+
+    public static final SlimefunItemStack ROUTER = new SlimefunItemStack(
+        "QGP_ROUTER",
+        Material.CHISELED_QUARTZ_BLOCK,
+        "&fQGP Router",
+        "",
+        "&7Attempts to evenly distribute",
+        "&7Quark-Gluon Plasma among adjacent capacitors.",
+        "&7Can be used for making storage cells or wires"
+    );
 }

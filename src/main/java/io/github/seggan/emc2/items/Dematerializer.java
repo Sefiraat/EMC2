@@ -2,13 +2,12 @@ package io.github.seggan.emc2.items;
 
 import io.github.mooy1.infinitylib.presets.MenuPreset;
 import io.github.mooy1.infinitylib.slimefun.TickingContainer;
+import io.github.seggan.emc2.Items;
 import io.github.seggan.emc2.qgp.ItemValues;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
@@ -24,8 +23,8 @@ public class Dematerializer extends TickingContainer {
     private static final int[] BORDER = new int[]{3, 5};
     private static final int INPUT_SLOT = 4;
 
-    public Dematerializer(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
-        super(category, item, recipeType, recipe);
+    public Dematerializer() {
+        super(Items.CATEGORY, Items.DEMATERIALIZER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[9]);
     }
 
     @Override
@@ -37,15 +36,17 @@ public class Dematerializer extends TickingContainer {
         if (s != null) {
             long buff = Long.parseLong(s);
             if (buff > 0) {
-                long overflow = Capacitor.distributeAmong(block, buff);
+                long overflow = QGPCapacitor.distributeAmong(block, buff);
                 BlockStorage.addBlockInfo(block, "buffer", Long.toString(overflow), true);
                 return;
             }
         }
 
         BlockStorage.addBlockInfo(block, "buffer", Long.toString(
-            Capacitor.distributeAmong(block, ItemValues.getInstance().getValue(stack))
+            QGPCapacitor.distributeAmong(block, ItemValues.getInstance().getValue(stack))
         ));
+
+        blockMenu.consumeItem(INPUT_SLOT);
     }
 
     @Nonnull

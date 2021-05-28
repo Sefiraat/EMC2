@@ -4,7 +4,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
-import io.github.seggan.emc2.items.Capacitor;
+import io.github.seggan.emc2.items.QGPCapacitor;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -79,15 +79,15 @@ public class TestCaps {
             BlockStorage.addBlockInfo(cap1, "id", "SMALL_QGP_CAPACITOR");
             BlockStorage.addBlockInfo(cap2, "id", "SMALL_QGP_CAPACITOR");
 
-            Capacitor.distributeAmong(center, 4);
-            Assertions.assertEquals(Capacitor.get(cap1), Capacitor.get(cap2));
+            QGPCapacitor.distributeAmong(center, 4);
+            Assertions.assertEquals(QGPCapacitor.get(cap1), QGPCapacitor.get(cap2));
 
-            Assertions.assertEquals(3, Capacitor.removeAmong(center, 3));
-            Assertions.assertEquals(1, Capacitor.removeAmong(center, 3));
+            Assertions.assertEquals(3, QGPCapacitor.removeAmong(center, 3));
+            Assertions.assertEquals(1, QGPCapacitor.removeAmong(center, 3));
 
-            Capacitor.distributeAmong(center, 5);
-            Assertions.assertEquals(2, Capacitor.get(cap1));
-            Assertions.assertEquals(3, Capacitor.get(cap2));
+            QGPCapacitor.distributeAmong(center, 5);
+            Assertions.assertEquals(2, QGPCapacitor.get(cap1));
+            Assertions.assertEquals(3, QGPCapacitor.get(cap2));
         }
     }
 }
