@@ -7,6 +7,7 @@ import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
@@ -32,7 +33,19 @@ public class Dematerializer extends TickingContainer {
         ItemStack stack = blockMenu.getItemInSlot(INPUT_SLOT);
         if (stack == null || stack.getType().isAir()) return;
 
-        Capacitor.distributeAmong(block, ItemValues.getInstance().getValue(stack));
+        String s = BlockStorage.getLocationInfo(block.getLocation(), "buffer");
+        if (s != null) {
+            long buff = Long.parseLong(s);
+            if (buff > 0) {
+                long overflow = Capacitor.distributeAmong(block, buff);
+                BlockStorage.addBlockInfo(block, "buffer", Long.toString(overflow), true);
+                return;
+            }
+        }
+
+        BlockStorage.addBlockInfo(block, "buffer", Long.toString(
+            Capacitor.distributeAmong(block, ItemValues.getInstance().getValue(stack))
+        ));
     }
 
     @Nonnull

@@ -26,6 +26,11 @@ public class TestMaterials {
         emc2 = MockBukkit.load(EMC2.class);
     }
 
+    @AfterAll
+    public static void tearDown() {
+        MockBukkit.unmock();
+    }
+
     @Test
     public void testMissingItems() {
         Set<Material> items = ItemValues.getInstance().getValues().keySet();
@@ -46,10 +51,5 @@ public class TestMaterials {
             missing.forEach(System.out::println);
             throw new AssertionError("Missing materials: " + missing.size());
         }
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        MockBukkit.unmock();
     }
 }

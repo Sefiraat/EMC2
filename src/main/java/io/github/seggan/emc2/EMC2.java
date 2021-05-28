@@ -30,6 +30,8 @@ public final class EMC2 extends AbstractAddon {
         if (SlimefunPlugin.getMinecraftVersion() != MinecraftVersion.UNIT_TEST) {
             ItemValues.setup();
         }
+
+        Setup.setup(this);
     }
 
     @Override
@@ -40,7 +42,7 @@ public final class EMC2 extends AbstractAddon {
     @Nonnull
     @Override
     protected String getGithubPath() {
-        return "Seggan/AddonTemplate/master";
+        return "Seggan/EMC2/master";
     }
 
     @Override
