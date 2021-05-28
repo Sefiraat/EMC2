@@ -129,25 +129,35 @@ public class Capacitor extends SlimefunItem {
     private static long removeAmong(List<Block> blocks, long amount) {
         if (blocks.isEmpty()) return amount;
 
-        long splitAmount = Math.round((double) amount / blocks.size());
+        long splitAmount = amount / blocks.size();
+        long extra = amount % blocks.size();
         long underflow = 0;
 
         Iterator<Block> iterator = blocks.iterator();
         while (iterator.hasNext()) {
             Block b = iterator.next();
-            Capacitor capacitor = (Capacitor) BlockStorage.check(b); // guaranteed cast
-            assert capacitor != null; // will not fail
 
-            long storedAmount = Capacitor.get(b);
-            long newAmount = storedAmount - splitAmount;
+            long newAmount = Capacitor.get(b) - splitAmount;
+
             if (newAmount < 0) {
                 iterator.remove();
                 Capacitor.set(b, 0);
                 underflow += -newAmount;
             } else {
-                Capacitor.set(b, newAmount);
+                long adjustedAmount = newAmount;
+                if (extra > 0) {
+                    adjustedAmount -= extra;
+                }
+                if (adjustedAmount < 0) {
+                    Capacitor.set(b, newAmount);
+                } else {
+                    extra = 0;
+                    Capacitor.set(b, adjustedAmount);
+                }
             }
         }
+
+        underflow += extra;
 
         if (underflow == 0) return 0;
 
