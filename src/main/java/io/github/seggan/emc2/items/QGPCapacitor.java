@@ -15,6 +15,7 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 public class QGPCapacitor extends SlimefunItem {
 
@@ -36,12 +37,21 @@ public class QGPCapacitor extends SlimefunItem {
         super(Items.CATEGORY, item, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
         this.capacity = capacity;
 
-        addItemHandler((BlockUseHandler) e ->
-            e.getClickedBlock().ifPresent(b -> e.getPlayer().sendMessage(String.format(
-            "This %s has %d Quark-Gluon Plasma",
-            QGPCapacitor.this.getItemName(),
-            QGPCapacitor.get(b)
-        ))));
+        addItemHandler(onRightClick());
+    }
+
+    private BlockUseHandler onRightClick() {
+        return e -> {
+            Optional<Block> optionalBlock = e.getClickedBlock();
+            if (optionalBlock.isEmpty()) return;
+
+            Block b = optionalBlock.get();
+            e.getPlayer().sendMessage(String.format(
+                "This %s has %d Quark-Gluon Plasma",
+                QGPCapacitor.this.getItemName(),
+                QGPCapacitor.get(b)
+            ));
+        };
     }
 
     public static long get(@Nonnull Block b) {

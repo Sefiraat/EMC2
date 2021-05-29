@@ -1,5 +1,6 @@
 package io.github.seggan.emc2;
 
+import io.github.seggan.emc2.items.Atomizer;
 import io.github.seggan.emc2.items.Dematerializer;
 import io.github.seggan.emc2.items.QGPCapacitor;
 import io.github.seggan.emc2.items.Rematerializer;
@@ -18,5 +19,7 @@ public class Setup {
         new Dematerializer().register(addon);
         new Rematerializer().register(addon);
         new Router().register(addon);
+
+        new Atomizer().register(addon);
     }
 }

@@ -63,4 +63,25 @@ public class Items {
         "&7Quark-Gluon Plasma among adjacent capacitors.",
         "&7Can be used for making storage cells or wires"
     );
+
+    public static final SlimefunItemStack QGP_CONTAINMENT_FIELD = new SlimefunItemStack(
+        "QGP_CONTAINMENT_FIELD",
+        Material.PAPER,
+        "&bQuark-Gluon Plasma Containment Field"
+    );
+
+    public static final SlimefunItemStack QGP_CONTAINMENT_CELL = new SlimefunItemStack(
+        "QGP_CONTAINMENT_CELL",
+        Material.HEART_OF_THE_SEA,
+        "&bQuark-Gluon Plasma Containment Cell"
+    );
+
+    public static final SlimefunItemStack QGP_ATOMIZER = new SlimefunItemStack(
+        "QGP_ATOMIZER",
+        Material.BEACON,
+        "&bQuark-Gluon Plasma Atomizer",
+        "",
+        "&eRight Click&7 this with an item to check how much",
+        "&7Quark-Gluon Plasma it is worth"
+    );
 }
