@@ -1,18 +1,28 @@
 package io.github.seggan.emc2;
 
+import io.github.thebusybiscuit.slimefun4.core.categories.LockedCategory;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import lombok.experimental.UtilityClass;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 
 @UtilityClass
 public class Items {
 
-    public static final Category CATEGORY = new Category(
-        EMC2.inst().getKey("emc2_category"),
-        new CustomItem(Material.QUARTZ_BRICKS, "Emc²")
-    );
+    public static final Category CATEGORY;
+
+    static {
+        assert SlimefunPlugin.instance() != null;
+
+        CATEGORY = new LockedCategory(
+            EMC2.inst().getKey("emc2_category"),
+            new CustomItem(Material.QUARTZ_BRICKS, "Emc²"),
+            new NamespacedKey(SlimefunPlugin.instance(), "electricity")
+        );
+    }
 
     public static final SlimefunItemStack SMALL_CAPACITOR = new SlimefunItemStack(
         "SMALL_QGP_CAPACITOR",
