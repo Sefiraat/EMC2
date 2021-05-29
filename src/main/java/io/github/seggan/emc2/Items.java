@@ -46,6 +46,14 @@ public class Items {
         "&7Disintegrates items into Quark-Gluon Plasma"
     );
 
+    public static final SlimefunItemStack MATERIALIZER = new SlimefunItemStack(
+        "MATERIALIZER",
+        Material.QUARTZ_PILLAR,
+        "&fMaterializer",
+        "",
+        "&7Copies an item using Quark-Gluon Plasma"
+    );
+
     public static final SlimefunItemStack ROUTER = new SlimefunItemStack(
         "QGP_ROUTER",
         Material.CHISELED_QUARTZ_BLOCK,

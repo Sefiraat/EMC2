@@ -1,6 +1,7 @@
 package io.github.seggan.emc2;
 
 import io.github.seggan.emc2.items.Dematerializer;
+import io.github.seggan.emc2.items.Materializer;
 import io.github.seggan.emc2.items.QGPCapacitor;
 import io.github.seggan.emc2.items.Router;
 import lombok.experimental.UtilityClass;
@@ -15,6 +16,7 @@ public class Setup {
         new QGPCapacitor(Items.LARGE_CAPACITOR, new ItemStack[9], 2_500_000).register(addon);
 
         new Dematerializer().register(addon);
+        new Materializer().register(addon);
         new Router().register(addon);
     }
 }
