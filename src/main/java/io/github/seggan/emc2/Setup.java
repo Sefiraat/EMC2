@@ -5,7 +5,11 @@ import io.github.seggan.emc2.items.Dematerializer;
 import io.github.seggan.emc2.items.QGPCapacitor;
 import io.github.seggan.emc2.items.Rematerializer;
 import io.github.seggan.emc2.items.Router;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import lombok.experimental.UtilityClass;
+import me.mrCookieSlime.Slimefun.Lists.RecipeType;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import org.bukkit.inventory.ItemStack;
 
 @UtilityClass
@@ -21,5 +25,21 @@ public class Setup {
         new Router().register(addon);
 
         new Atomizer().register(addon);
+
+        new SlimefunItem(Items.CATEGORY, Items.SUPERCONDUCTING_WIRE, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+            SlimefunItems.FREEZER_2, SlimefunItems.FREEZER_2, SlimefunItems.FREEZER_2,
+            SlimefunItems.COPPER_WIRE, SlimefunItems.COPPER_WIRE, SlimefunItems.COPPER_WIRE,
+            SlimefunItems.FREEZER_2, SlimefunItems.FREEZER_2, SlimefunItems.FREEZER_2
+        }, new SlimefunItemStack(Items.SUPERCONDUCTING_WIRE, 2)).register(addon);
+        new SlimefunItem(Items.CATEGORY, Items.QGP_CONTAINMENT_FIELD, RecipeType.MAGIC_WORKBENCH, new ItemStack[]{
+            SlimefunItems.AIR_RUNE, SlimefunItems.SCROLL_OF_DIMENSIONAL_TELEPOSITION, SlimefunItems.AIR_RUNE,
+            Items.SUPERCONDUCTING_WIRE, Items.SUPERCONDUCTING_WIRE, Items.SUPERCONDUCTING_WIRE,
+            SlimefunItems.REINFORCED_PLATE, SlimefunItems.REINFORCED_PLATE, SlimefunItems.REINFORCED_PLATE
+        }).register(addon);
+        new SlimefunItem(Items.CATEGORY, Items.QGP_CONTAINMENT_CELL, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+            SlimefunItems.WITHER_PROOF_GLASS, Items.QGP_CONTAINMENT_FIELD, SlimefunItems.WITHER_PROOF_GLASS,
+            Items.QGP_CONTAINMENT_FIELD, null, Items.QGP_CONTAINMENT_FIELD,
+            SlimefunItems.WITHER_PROOF_GLASS, Items.QGP_CONTAINMENT_FIELD, SlimefunItems.WITHER_PROOF_GLASS
+        }).register(addon);
     }
 }

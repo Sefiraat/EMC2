@@ -76,6 +76,12 @@ public class Items {
         "&bQuark-Gluon Plasma Containment Cell"
     );
 
+    public static final SlimefunItemStack SUPERCONDUCTING_WIRE = new SlimefunItemStack(
+        "SUPERCONDUCTING_WIRE",
+        Material.STRING,
+        "&bSuperconducting Wire"
+    );
+
     public static final SlimefunItemStack QGP_ATOMIZER = new SlimefunItemStack(
         "QGP_ATOMIZER",
         Material.BEACON,
