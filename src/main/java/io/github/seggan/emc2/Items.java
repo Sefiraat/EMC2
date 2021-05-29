@@ -46,8 +46,8 @@ public class Items {
         "&7Disintegrates items into Quark-Gluon Plasma"
     );
 
-    public static final SlimefunItemStack MATERIALIZER = new SlimefunItemStack(
-        "MATERIALIZER",
+    public static final SlimefunItemStack REMATERIALIZER = new SlimefunItemStack(
+        "REMATERIALIZER",
         Material.QUARTZ_PILLAR,
         "&fRematerializer",
         "",

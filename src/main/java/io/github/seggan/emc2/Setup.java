@@ -5,6 +5,7 @@ import io.github.seggan.emc2.items.Dematerializer;
 import io.github.seggan.emc2.items.QGPCapacitor;
 import io.github.seggan.emc2.items.Rematerializer;
 import io.github.seggan.emc2.items.Router;
+import io.github.thebusybiscuit.slimefun4.core.researching.Research;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import lombok.experimental.UtilityClass;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -15,7 +16,9 @@ import org.bukkit.inventory.ItemStack;
 @UtilityClass
 public class Setup {
 
-    public static void setup(EMC2 addon) {
+    private static int id = 112_112;
+
+    public static void setupRecipes(EMC2 addon) {
         new QGPCapacitor(Items.SMALL_CAPACITOR, new ItemStack[]{
             SlimefunItems.REDSTONE_ALLOY, Items.QGP_CONTAINMENT_CELL, SlimefunItems.REDSTONE_ALLOY,
             Items.QGP_CONTAINMENT_CELL, SlimefunItems.ENERGIZED_CAPACITOR, Items.QGP_CONTAINMENT_CELL,
@@ -53,5 +56,21 @@ public class Setup {
             Items.QGP_CONTAINMENT_FIELD, null, Items.QGP_CONTAINMENT_FIELD,
             SlimefunItems.WITHER_PROOF_GLASS, Items.QGP_CONTAINMENT_FIELD, SlimefunItems.WITHER_PROOF_GLASS
         }).register(addon);
+    }
+
+    public static void setupResearches() {
+        registerResearch("qgp_storage", "QGP Storage", 50, Items.SMALL_CAPACITOR, Items.MEDIUM_CAPACITOR);
+        registerResearch("more_qgp_storage", "More GQP Storage", 70, Items.LARGE_CAPACITOR);
+        registerResearch("materialization", "Materialization", 70, Items.DEMATERIALIZER, Items.REMATERIALIZER);
+        registerResearch("routing", "Routing", 40, Items.ROUTER);
+        registerResearch("qgp_manipulation", "QGP Manipulation", 50, Items.QGP_CONTAINMENT_CELL,
+            Items.QGP_CONTAINMENT_FIELD, Items.SUPERCONDUCTING_WIRE, Items.ATOMIZER);
+
+    }
+
+    private static void registerResearch(String key, String name, int cost, SlimefunItemStack... items) {
+        Research research = new Research(EMC2.inst().getKey(key), id++, name, cost);
+        research.addItems(items);
+        research.register();
     }
 }

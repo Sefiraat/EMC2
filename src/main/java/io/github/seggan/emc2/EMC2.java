@@ -26,7 +26,8 @@ public final class EMC2 extends AbstractAddon {
         super.onEnable();
 
         ItemValues.setup();
-        Setup.setup(this);
+        Setup.setupRecipes(this);
+        Setup.setupResearches();
     }
 
     @Override
