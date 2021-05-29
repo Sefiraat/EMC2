@@ -24,14 +24,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Map;
 
-public class Materializer extends SlimefunItem {
+public class Rematerializer extends SlimefunItem {
 
     private static final int[] BACKGROUND = new int[]{0, 8, 9, 13, 17, 18, 22, 26};
     private static final int[] INPUT_BORDER = new int[]{1, 2, 3, 10, 12, 19, 20, 21};
     private static final int[] OUTPUT_BORDER = new int[]{5, 6, 7, 14, 16, 23, 24, 25};
 
     private static final int ACTION_SLOT = 4;
-    private static final int ITEM_SLOT = 10;
+    private static final int ITEM_SLOT = 11;
     private static final int OUTPUT_SLOT = 15;
 
     private static final ItemStack INPUT_ITEM = new CustomItem(
@@ -52,7 +52,7 @@ public class Materializer extends SlimefunItem {
         "&eShift Right Click&7 to copy a stack"
     );
 
-    public Materializer() {
+    public Rematerializer() {
         super(Items.CATEGORY, Items.MATERIALIZER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[9]);
 
         new BlockMenuPreset(this.getId(), this.getItemName()) {
@@ -65,7 +65,7 @@ public class Materializer extends SlimefunItem {
             @Override
             public void newInstance(@Nonnull BlockMenu menu, @Nonnull Block b) {
                 menu.addMenuClickHandler(ACTION_SLOT, (p, slot, item1, action) -> {
-                    Materializer.this.onClick(p, menu, action);
+                    Rematerializer.this.onClick(p, menu, action);
                     return false;
                 });
             }

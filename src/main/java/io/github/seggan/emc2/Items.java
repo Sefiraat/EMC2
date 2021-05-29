@@ -49,7 +49,7 @@ public class Items {
     public static final SlimefunItemStack MATERIALIZER = new SlimefunItemStack(
         "MATERIALIZER",
         Material.QUARTZ_PILLAR,
-        "&fMaterializer",
+        "&fRematerializer",
         "",
         "&7Copies an item using Quark-Gluon Plasma"
     );

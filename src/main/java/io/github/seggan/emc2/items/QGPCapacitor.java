@@ -1,6 +1,7 @@
 package io.github.seggan.emc2.items;
 
 import io.github.seggan.emc2.Items;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
 import lombok.Getter;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -34,6 +35,13 @@ public class QGPCapacitor extends SlimefunItem {
     public QGPCapacitor(SlimefunItemStack item, ItemStack[] recipe, long capacity) {
         super(Items.CATEGORY, item, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
         this.capacity = capacity;
+
+        addItemHandler((BlockUseHandler) e ->
+            e.getClickedBlock().ifPresent(b -> e.getPlayer().sendMessage(String.format(
+            "This %s has %d Quark-Gluon Plasma",
+            QGPCapacitor.this.getItemName(),
+            QGPCapacitor.get(b)
+        ))));
     }
 
     public static long get(@Nonnull Block b) {
