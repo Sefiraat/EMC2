@@ -82,8 +82,8 @@ public class Items {
         "&bSuperconducting Wire"
     );
 
-    public static final SlimefunItemStack QGP_ATOMIZER = new SlimefunItemStack(
-        "QGP_ATOMIZER",
+    public static final SlimefunItemStack ATOMIZER = new SlimefunItemStack(
+        "ATOMIZER",
         Material.BEACON,
         "&bQuark-Gluon Plasma Atomizer",
         "",

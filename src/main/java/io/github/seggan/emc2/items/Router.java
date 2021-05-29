@@ -1,6 +1,7 @@
 package io.github.seggan.emc2.items;
 
 import io.github.seggan.emc2.Items;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -13,7 +14,11 @@ import org.bukkit.inventory.ItemStack;
 public class Router extends SlimefunItem {
 
     public Router() {
-        super(Items.CATEGORY, Items.ROUTER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[9]);
+        super(Items.CATEGORY, Items.ROUTER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+            SlimefunItems.DAMASCUS_STEEL_INGOT, SlimefunItems.DAMASCUS_STEEL_INGOT, SlimefunItems.DAMASCUS_STEEL_INGOT,
+            Items.QGP_CONTAINMENT_FIELD, Items.QGP_CONTAINMENT_CELL, Items.QGP_CONTAINMENT_FIELD,
+            SlimefunItems.DAMASCUS_STEEL_INGOT, SlimefunItems.DAMASCUS_STEEL_INGOT, SlimefunItems.DAMASCUS_STEEL_INGOT
+        });
 
         addItemHandler(new BlockTicker() {
             @Override

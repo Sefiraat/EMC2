@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 public class Atomizer extends SlimefunItem {
 
     public Atomizer() {
-        super(Items.CATEGORY, Items.QGP_ATOMIZER, RecipeType.ANCIENT_ALTAR, new ItemStack[]{
+        super(Items.CATEGORY, Items.ATOMIZER, RecipeType.ANCIENT_ALTAR, new ItemStack[]{
             SlimefunItems.AIR_RUNE, Items.QGP_CONTAINMENT_FIELD, SlimefunItems.WATER_RUNE,
             Items.QGP_CONTAINMENT_FIELD, Items.QGP_CONTAINMENT_CELL, Items.QGP_CONTAINMENT_FIELD,
             SlimefunItems.EARTH_RUNE, Items.QGP_CONTAINMENT_FIELD, SlimefunItems.FIRE_RUNE

@@ -53,7 +53,11 @@ public class Rematerializer extends SlimefunItem {
     );
 
     public Rematerializer() {
-        super(Items.CATEGORY, Items.MATERIALIZER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[9]);
+        super(Items.CATEGORY, Items.MATERIALIZER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[]{
+            Items.QGP_CONTAINMENT_CELL, Items.SUPERCONDUCTING_WIRE, Items.QGP_CONTAINMENT_CELL,
+            Items.SUPERCONDUCTING_WIRE, Items.ATOMIZER, Items.SUPERCONDUCTING_WIRE,
+            Items.QGP_CONTAINMENT_CELL, Items.SUPERCONDUCTING_WIRE, Items.QGP_CONTAINMENT_CELL
+        });
 
         new BlockMenuPreset(this.getId(), this.getItemName()) {
 

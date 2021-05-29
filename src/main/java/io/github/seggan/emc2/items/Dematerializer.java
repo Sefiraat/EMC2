@@ -4,6 +4,7 @@ import io.github.mooy1.infinitylib.presets.MenuPreset;
 import io.github.mooy1.infinitylib.slimefun.TickingContainer;
 import io.github.seggan.emc2.Items;
 import io.github.seggan.emc2.qgp.ItemValues;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -24,7 +25,11 @@ public class Dematerializer extends TickingContainer {
     private static final int INPUT_SLOT = 4;
 
     public Dematerializer() {
-        super(Items.CATEGORY, Items.DEMATERIALIZER, RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[9]);
+        super(Items.CATEGORY, Items.DEMATERIALIZER, RecipeType.MAGIC_WORKBENCH, new ItemStack[]{
+            SlimefunItems.FIRE_RUNE, Items.QGP_CONTAINMENT_CELL, SlimefunItems.FIRE_RUNE,
+            Items.ROUTER, Items.ATOMIZER, Items.ROUTER,
+            SlimefunItems.FIRE_RUNE, Items.QGP_CONTAINMENT_CELL, SlimefunItems.FIRE_RUNE,
+        });
     }
 
     @Override
