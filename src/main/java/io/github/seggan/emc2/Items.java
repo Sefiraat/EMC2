@@ -19,7 +19,7 @@ public class Items {
 
         CATEGORY = new LockedCategory(
             EMC2.inst().getKey("emc2_category"),
-            new CustomItem(Material.QUARTZ_BRICKS, "Emc²"),
+            new CustomItem(Material.QUARTZ_BRICKS, "EMC2"),
             new NamespacedKey(SlimefunPlugin.instance(), "electricity")
         );
     }
