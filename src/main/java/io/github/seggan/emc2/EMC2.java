@@ -32,7 +32,7 @@ public final class EMC2 extends AbstractAddon {
 
     @Override
     protected Metrics setupMetrics() {
-        return null;
+        return new Metrics(this, 11550);
     }
 
     @Nonnull
