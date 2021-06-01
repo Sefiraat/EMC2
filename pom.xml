@@ -58,7 +58,7 @@
         <dependency>
             <groupId>io.github.mooy1</groupId>
             <artifactId>InfinityLib</artifactId>
-            <version>5e3e325</version>
+            <version>71cff3336d</version>
             <scope>compile</scope>
         </dependency>
 
@@ -86,7 +86,7 @@
 
     <build>
         <finalName>${project.name} v${project.version}</finalName>
-        <defaultGoal>clean package</defaultGoal>
+        <defaultGoal>clean package -T 2</defaultGoal>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <resources>
             <resource>

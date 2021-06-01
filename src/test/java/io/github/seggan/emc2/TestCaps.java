@@ -76,8 +76,8 @@ public class TestCaps {
             BlockMock cap2 = world.getBlockAt(0, 2, 0);
             BlockMock center = world.getBlockAt(0, 1, 0);
 
-            BlockStorage.addBlockInfo(cap1, "id", "SMALL_QGP_CAPACITOR");
-            BlockStorage.addBlockInfo(cap2, "id", "SMALL_QGP_CAPACITOR");
+            BlockStorage.addBlockInfo(cap1, "id", Items.SMALL_CAPACITOR.getItemId());
+            BlockStorage.addBlockInfo(cap2, "id", Items.SMALL_CAPACITOR.getItemId());
 
             QGPCapacitor.distributeAmong(center, 4);
             Assertions.assertEquals(QGPCapacitor.get(cap1), QGPCapacitor.get(cap2));

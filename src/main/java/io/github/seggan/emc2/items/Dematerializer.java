@@ -1,12 +1,11 @@
 package io.github.seggan.emc2.items;
 
 import io.github.mooy1.infinitylib.presets.MenuPreset;
-import io.github.mooy1.infinitylib.slimefun.TickingContainer;
+import io.github.mooy1.infinitylib.slimefun.AbstractTickingContainer;
 import io.github.seggan.emc2.Items;
 import io.github.seggan.emc2.qgp.ItemValues;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
@@ -18,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class Dematerializer extends TickingContainer {
+public class Dematerializer extends AbstractTickingContainer {
 
     private static final int[] BACKGROUND = new int[]{0, 1, 2, 6, 7, 8};
     private static final int[] BORDER = new int[]{3, 5};
@@ -33,7 +32,7 @@ public class Dematerializer extends TickingContainer {
     }
 
     @Override
-    protected void tick(@Nonnull BlockMenu blockMenu, @Nonnull Block block, @Nonnull Config config) {
+    protected void tick(@Nonnull BlockMenu blockMenu, @Nonnull Block block) {
         ItemStack stack = blockMenu.getItemInSlot(INPUT_SLOT);
         if (stack == null || stack.getType().isAir()) return;
 

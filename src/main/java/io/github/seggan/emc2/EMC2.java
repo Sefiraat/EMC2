@@ -21,13 +21,31 @@ public final class EMC2 extends AbstractAddon {
     }
 
     @Override
-    public void onEnable() {
+    public void onAddonEnable() {
         instance = this;
-        super.onEnable();
 
         ItemValues.setup();
         Setup.setupRecipes(this);
         Setup.setupResearches();
+    }
+
+    @Override
+    public void onAddonDisable() {
+        instance = null;
+    }
+
+    @Override
+    protected void onTestEnable() {
+        instance = this;
+
+        ItemValues.setup();
+        Setup.setupRecipes(this);
+        Setup.setupResearches();
+    }
+
+    @Override
+    public void onTestDisable() {
+        instance = null;
     }
 
     @Override
@@ -39,11 +57,6 @@ public final class EMC2 extends AbstractAddon {
     @Override
     protected String getGithubPath() {
         return "Seggan/EMC2/master";
-    }
-
-    @Override
-    public void onDisable() {
-        instance = null;
     }
 
     public static EMC2 inst() {
