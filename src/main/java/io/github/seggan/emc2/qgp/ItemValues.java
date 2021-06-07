@@ -1,5 +1,6 @@
 package io.github.seggan.emc2.qgp;
 
+import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import lombok.Getter;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
@@ -255,6 +256,8 @@ public class ItemValues {
     }
 
     public long getValue(ItemStack stack) {
+        if (SlimefunGuide.isGuideItem(stack)) return 0;
+
         SlimefunItem slimefunItem = SlimefunItem.getByItem(stack);
         if (slimefunItem != null) {
             Map<ItemStack, Long> calc = Calculator.calculate(slimefunItem, stack.getAmount());
