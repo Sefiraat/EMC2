@@ -2,12 +2,20 @@ package io.github.seggan.emc2;
 
 import io.github.mooy1.infinitylib.AbstractAddon;
 import io.github.mooy1.infinitylib.bstats.bukkit.Metrics;
+import io.github.mooy1.infinitylib.bstats.charts.SingleLineChart;
+import io.github.seggan.emc2.items.QGPCapacitor;
 import io.github.seggan.emc2.qgp.ItemValues;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import org.bukkit.Location;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPluginLoader;
 
-import javax.annotation.Nonnull;
 import java.io.File;
+import java.util.Map;
+import javax.annotation.Nonnull;
 
 public final class EMC2 extends AbstractAddon {
     
@@ -50,7 +58,19 @@ public final class EMC2 extends AbstractAddon {
 
     @Override
     protected Metrics setupMetrics() {
-        return new Metrics(this, 11550);
+        Metrics metrics = new Metrics(this, 11550);
+        metrics.addCustomChart(new SingleLineChart("qgp_stored", () -> {
+            int amount = 0;
+            for (BlockStorage bs : SlimefunPlugin.getRegistry().getWorlds().values()) {
+                for (Map.Entry<Location, Config> entry : bs.getRawStorage().entrySet()) {
+                    if (SlimefunItem.getByID(entry.getValue().getString("id")) instanceof QGPCapacitor) {
+                        amount += QGPCapacitor.get(entry.getKey().getBlock());
+                    }
+                }
+            }
+            return amount;
+        }));
+        return metrics;
     }
 
     @Nonnull
