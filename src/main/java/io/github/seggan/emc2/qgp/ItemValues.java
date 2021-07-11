@@ -2,16 +2,17 @@ package io.github.seggan.emc2.qgp;
 
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
-import lombok.Getter;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nonnull;
+import lombok.Getter;
+
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
+import javax.annotation.Nonnull;
 
 public class ItemValues {
 
@@ -257,6 +258,8 @@ public class ItemValues {
 
     public long getValue(ItemStack stack) {
         if (SlimefunGuide.isGuideItem(stack)) return 0;
+
+        if (stack.getType() == Material.SPAWNER) return 150;
 
         SlimefunItem slimefunItem = SlimefunItem.getByItem(stack);
         if (slimefunItem != null) {
