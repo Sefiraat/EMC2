@@ -20,9 +20,9 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Map;
 
 public class Rematerializer extends SlimefunItem {
 
@@ -136,6 +136,8 @@ public class Rematerializer extends SlimefunItem {
             );
             return;
         }
+
+        BlockStorage.addBlockInfo(b, "buffer", Long.toString(0));
 
         if (action.isRightClicked()) {
             menu.pushItem(item, OUTPUT_SLOT);
