@@ -131,7 +131,7 @@ public class Rematerializer extends SlimefunItem {
         if (taken < cost) { // too little qgp taken
             BlockStorage.addBlockInfo(b, "buffer", Long.toString(taken)); // store to buffer
             p.sendMessage(ChatColor.RED + "Not enough Quark-Gluon Plasma. Please ensure there is at least " +
-                "one QGP Capacitor adjacent to the Materializer and that they have sufficient Quark-Gluon " +
+                "one QGP Capacitor adjacent to the Rematerializer and that they have sufficient Quark-Gluon " +
                 "Plasma between them"
             );
             return;
