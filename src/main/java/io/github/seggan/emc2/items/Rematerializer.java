@@ -114,7 +114,7 @@ public class Rematerializer extends SlimefunItem {
         ItemStack item = copyItem.clone();
         item.setAmount(action.isShiftClicked() ? 64 : 1);
 
-        long cost = ItemValues.getInstance().getValue(item);
+        long cost = ItemValues.getInstance().getValue(item); // get the cost of the item
         if (cost == 0) {
             p.sendMessage(ChatColor.RED + "This item is not copyable");
             return;
@@ -123,13 +123,13 @@ public class Rematerializer extends SlimefunItem {
         Block b = menu.getBlock();
         String s = BlockStorage.getLocationInfo(b.getLocation(), "buffer");
         if (s != null) {
-            cost -= Long.parseLong(s);
+            cost -= Long.parseLong(s); // reduce the cost by the buffer
             cost = Math.max(1, cost);
         }
 
-        long taken = QGPCapacitor.removeAmong(b, cost);
-        if (taken < cost) {
-            BlockStorage.addBlockInfo(b, "buffer", Long.toString(taken));
+        long taken = QGPCapacitor.removeAmong(b, cost); // take any more qgp needed
+        if (taken < cost) { // too little qgp taken
+            BlockStorage.addBlockInfo(b, "buffer", Long.toString(taken)); // store to buffer
             p.sendMessage(ChatColor.RED + "Not enough Quark-Gluon Plasma. Please ensure there is at least " +
                 "one QGP Capacitor adjacent to the Materializer and that they have sufficient Quark-Gluon " +
                 "Plasma between them"
@@ -137,7 +137,7 @@ public class Rematerializer extends SlimefunItem {
             return;
         }
 
-        BlockStorage.addBlockInfo(b, "buffer", Long.toString(0));
+        BlockStorage.addBlockInfo(b, "buffer", Long.toString(0)); // clear buffer on successful copy
 
         if (action.isRightClicked()) {
             menu.pushItem(item, OUTPUT_SLOT);
