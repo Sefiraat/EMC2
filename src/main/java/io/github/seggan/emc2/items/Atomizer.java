@@ -6,6 +6,8 @@ import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.cscorelib2.inventory.ItemUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
 public class Atomizer extends SlimefunItem {
@@ -22,18 +24,31 @@ public class Atomizer extends SlimefunItem {
 
     private BlockUseHandler onRightClick() {
         return e -> {
+            e.cancel();
+
             ItemStack item = e.getItem();
             if (item.getType().isAir()) return;
 
-            e.getPlayer().sendMessage(String.format(
-                "This item is worth %d Quark-Gluon Plasma in the Dematerializer",
-                ItemValues.getInstance().getValue(item, false)
-            ));
+            long value = ItemValues.getInstance().getValue(item, false);
 
-            e.getPlayer().sendMessage(String.format(
-                "This item costs %d Quark-Gluon Plasma in the Rematerializer",
-                ItemValues.getInstance().getValue(item, true)
-            ));
+            if (value > 0) {
+                e.getPlayer().sendMessage(String.format(
+                    "This %s" + ChatColor.RESET + " is worth %d Quark-Gluon Plasma in the Dematerializer",
+                    ItemUtils.getItemName(item),
+                    value
+                ));
+
+                e.getPlayer().sendMessage(String.format(
+                    "This %s" + ChatColor.RESET + " costs %d Quark-Gluon Plasma in the Rematerializer",
+                    ItemUtils.getItemName(item),
+                    ItemValues.getInstance().getValue(item, true)
+                ));
+            } else {
+                e.getPlayer().sendMessage(String.format(
+                    "This %s" + ChatColor.RESET + " is not copyable",
+                    ItemUtils.getItemName(item)
+                ));
+            }
         };
     }
 }
