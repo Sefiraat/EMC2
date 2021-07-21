@@ -114,7 +114,7 @@ public class Rematerializer extends SlimefunItem {
         ItemStack item = copyItem.clone();
         item.setAmount(action.isShiftClicked() ? 64 : 1);
 
-        long cost = ItemValues.getInstance().getValue(item); // get the cost of the item
+        long cost = ItemValues.getInstance().getValue(item, true); // get the cost of the item
         if (cost == 0) {
             p.sendMessage(ChatColor.RED + "This item is not copyable");
             return;

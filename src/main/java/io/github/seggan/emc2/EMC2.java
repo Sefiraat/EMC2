@@ -13,6 +13,8 @@ import org.bukkit.Location;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPluginLoader;
 
+import lombok.Getter;
+
 import java.io.File;
 import java.util.Map;
 import javax.annotation.Nonnull;
@@ -20,6 +22,9 @@ import javax.annotation.Nonnull;
 public final class EMC2 extends AbstractAddon {
     
     private static EMC2 instance;
+
+    @Getter
+    private boolean infxInstalled;
 
     public EMC2() {
     }
@@ -35,6 +40,8 @@ public final class EMC2 extends AbstractAddon {
         ItemValues.setup();
         Setup.setupRecipes(this);
         Setup.setupResearches();
+
+        infxInstalled = getServer().getPluginManager().isPluginEnabled("InfinityExpansion");
     }
 
     @Override

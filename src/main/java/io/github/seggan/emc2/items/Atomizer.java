@@ -26,8 +26,13 @@ public class Atomizer extends SlimefunItem {
             if (item.getType().isAir()) return;
 
             e.getPlayer().sendMessage(String.format(
-                "This item is worth %d Quark-Gluon Plasma",
-                ItemValues.getInstance().getValue(item)
+                "This item is worth %d Quark-Gluon Plasma in the Dematerializer",
+                ItemValues.getInstance().getValue(item, false)
+            ));
+
+            e.getPlayer().sendMessage(String.format(
+                "This item costs %d Quark-Gluon Plasma in the Rematerializer",
+                ItemValues.getInstance().getValue(item, true)
             ));
         };
     }

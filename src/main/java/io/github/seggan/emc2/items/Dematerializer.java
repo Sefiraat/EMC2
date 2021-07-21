@@ -47,7 +47,7 @@ public class Dematerializer extends AbstractTickingContainer {
         }
 
         BlockStorage.addBlockInfo(block, "buffer", Long.toString(
-            QGPCapacitor.distributeAmong(block, ItemValues.getInstance().getValue(stack))
+            QGPCapacitor.distributeAmong(block, ItemValues.getInstance().getValue(stack, false))
         ));
 
         blockMenu.consumeItem(INPUT_SLOT, 64);

@@ -1,7 +1,10 @@
 package io.github.seggan.emc2.qgp;
 
+import io.github.seggan.emc2.EMC2;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
+import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -11,6 +14,7 @@ import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nonnull;
 
@@ -20,6 +24,8 @@ public class ItemValues {
 
     @Getter
     private final Map<Material, Long> values = new EnumMap<>(Material.class);
+
+    private final Map<String, Long> overrides = new HashMap<>();
 
     private ItemValues() {
         Arrays.stream(Material.values()).filter(Material::isItem)
@@ -245,6 +251,9 @@ public class ItemValues {
 
         Arrays.stream(Material.values()).filter(SlimefunTag.UNBREAKABLE_MATERIALS::isTagged)
             .forEach(m -> values.put(m, 500_000L));
+
+        overrides.put(SlimefunItems.ALUMINUM_DUST.getItemId(), 2L);
+        overrides.put("VOID_BIT", 32L);
     }
 
     @Nonnull
@@ -256,24 +265,41 @@ public class ItemValues {
     public static void setup() {
     }
 
-    public long getValue(ItemStack stack) {
+    public long getValue(ItemStack stack, boolean applyExtra) {
         if (SlimefunGuide.isGuideItem(stack)) return 0;
+
+        long value = 0;
 
         if (stack.getType() == Material.SPAWNER) return 150;
 
         SlimefunItem slimefunItem = SlimefunItem.getByItem(stack);
         if (slimefunItem != null) {
+            if (slimefunItem.getAddon().equals(EMC2.inst())) return 0;
+
             Map<ItemStack, Long> calc = Calculator.calculate(slimefunItem, stack.getAmount());
             for (ItemStack i : calc.keySet()) {
-                if (SlimefunItem.getByItem(i) == null) {
+                SlimefunItem item = SlimefunItem.getByItem(i);
+                if (item == null) {
                     calc.put(i, values.getOrDefault(i.getType(), 0L) * calc.get(i));
+                } else {
+                    if (item.getRecipeType().equals(RecipeType.GEO_MINER)) {
+                        calc.put(i, 30L);
+                    }
+                    calc.put(i, overrides.getOrDefault(item.getId(), calc.get(i)));
                 }
             }
 
-            return calc.values().stream().mapToLong(Long::longValue).sum();
+            value = calc.values().stream().mapToLong(Long::longValue).sum();
         } else {
-            return values.getOrDefault(stack.getType(), 0L) * stack.getAmount();
+            value = values.getOrDefault(stack.getType(), 0L) * stack.getAmount();
         }
+
+        if (applyExtra) {
+            double percent = EMC2.inst().getConfig().getDouble("qgp.extra-burn", 20) / 100D;
+            value += value * percent;
+        }
+
+        return value;
     }
 
     private void add(long amount, Material... materials) {
