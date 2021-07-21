@@ -202,7 +202,7 @@ public class ItemValues {
         add(20, Material.RESPAWN_ANCHOR);
         add(10, Material.MAGMA_CREAM, Material.BLAZE_ROD, Material.FIRE_CHARGE, Material.BLAZE_POWDER);
         add(25, Material.GHAST_TEAR);
-        add(250, Material.NETHER_STAR);
+        add(100, Material.NETHER_STAR);
         add(500, Material.BEACON);
         add(15, Material.MAGMA_BLOCK, Material.NETHER_WART);
         // endregion
@@ -226,7 +226,7 @@ public class ItemValues {
         add(15, Material.SLIME_BALL, Material.COBWEB, Material.PHANTOM_MEMBRANE, Material.SPIDER_EYE);
         add(25, Material.EXPERIENCE_BOTTLE, Material.FERMENTED_SPIDER_EYE);
         add(30, "HEAD");
-        add(50, "SKULL");
+        add(30, "SKULL");
         add(135, Material.SLIME_BLOCK);
         add(15, Material.BONE_BLOCK);
         add(40, Material.HEART_OF_THE_SEA, Material.NAUTILUS_SHELL);
