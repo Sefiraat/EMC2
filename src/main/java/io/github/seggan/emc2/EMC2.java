@@ -24,7 +24,7 @@ public final class EMC2 extends AbstractAddon {
     private static EMC2 instance;
 
     @Getter
-    private boolean infxInstalled;
+    private boolean slimeTinkerInstalled;
 
     public EMC2() {
     }
@@ -41,7 +41,7 @@ public final class EMC2 extends AbstractAddon {
         Setup.setupRecipes(this);
         Setup.setupResearches();
 
-        infxInstalled = getServer().getPluginManager().isPluginEnabled("InfinityExpansion");
+        slimeTinkerInstalled = getServer().getPluginManager().isPluginEnabled("SlimeTinker");
     }
 
     @Override

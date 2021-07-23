@@ -1,5 +1,6 @@
 package io.github.seggan.emc2.qgp;
 
+import io.github.sefiraat.slimetinker.items.templates.ToolTemplate;
 import io.github.seggan.emc2.EMC2;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
@@ -8,6 +9,7 @@ import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.bukkit.Material;
 import org.bukkit.Tag;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 import lombok.Getter;
@@ -26,6 +28,8 @@ public class ItemValues {
     private final Map<Material, Long> values = new EnumMap<>(Material.class);
 
     private final Map<String, Long> overrides = new HashMap<>();
+
+    private final Map<Enchantment, Long> enchants = new HashMap<>();
 
     private ItemValues() {
         Arrays.stream(Material.values()).filter(Material::isItem)
@@ -254,6 +258,16 @@ public class ItemValues {
 
         overrides.put(SlimefunItems.ALUMINUM_DUST.getItemId(), 2L);
         overrides.put("VOID_BIT", 32L);
+        overrides.put("SEGGANESSON", 50L);
+        overrides.put("OSMIUM", 45L);
+
+        enchants.put(Enchantment.DAMAGE_ALL, 40L);
+        enchants.put(Enchantment.CHANNELING, 40L);
+        enchants.put(Enchantment.DURABILITY, 32L);
+        enchants.put(Enchantment.LOYALTY, 40L);
+        enchants.put(Enchantment.MENDING, 40L);
+        enchants.put(Enchantment.PROTECTION_ENVIRONMENTAL, 32L);
+        enchants.put(Enchantment.SILK_TOUCH, 40L);
     }
 
     @Nonnull
@@ -265,7 +279,7 @@ public class ItemValues {
     public static void setup() {
     }
 
-    public long getValue(ItemStack stack, boolean applyExtra) {
+    public long getValue(ItemStack stack, boolean rematerializing) {
         if (SlimefunGuide.isGuideItem(stack)) return 0;
 
         long value = 0;
@@ -273,8 +287,9 @@ public class ItemValues {
         if (stack.getType() == Material.SPAWNER) return 150;
 
         SlimefunItem slimefunItem = SlimefunItem.getByItem(stack);
-        if (slimefunItem != null) {
+        if (slimefunItem != null && !slimefunItem.isUseableInWorkbench()) {
             if (slimefunItem.getAddon().equals(EMC2.inst())) return 0;
+            if (EMC2.inst().isSlimeTinkerInstalled() && ToolTemplate.isTool(stack)) return 0;
 
             Map<ItemStack, Long> calc = Calculator.calculate(slimefunItem, stack.getAmount());
             for (ItemStack i : calc.keySet()) {
@@ -294,9 +309,26 @@ public class ItemValues {
             value = values.getOrDefault(stack.getType(), 0L) * stack.getAmount();
         }
 
-        if (applyExtra) {
+        if (rematerializing) {
             double percent = EMC2.inst().getConfig().getDouble("qgp.extra-burn", 20) / 100D;
             value += value * percent;
+        }
+
+        if (stack.hasItemMeta()) {
+            for (Map.Entry<Enchantment, Integer> entry : stack.getItemMeta().getEnchants().entrySet()) {
+                long enchVal = enchants.getOrDefault(entry.getKey(), 30L);
+                if (rematerializing) {
+                    long exponent = 1;
+                    for (int i = 0; i < entry.getValue(); i++) {
+                        exponent *= 2;
+                    }
+                    enchVal *= exponent;
+                } else {
+                    enchVal *= entry.getValue();
+                }
+
+                value += enchVal;
+            }
         }
 
         return value;

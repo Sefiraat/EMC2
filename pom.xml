@@ -82,6 +82,13 @@
             <version>3.10.0</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.Sefiraat</groupId>
+            <artifactId>SlimeTinker</artifactId>
+            <version>609a3c97b0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
