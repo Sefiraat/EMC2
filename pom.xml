@@ -40,7 +40,7 @@
         <dependency>
             <groupId>com.github.TheBusyBiscuit</groupId>
             <artifactId>Slimefun4</artifactId>
-            <version>RC-23</version>
+            <version>RC-27</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -58,7 +58,7 @@
         <dependency>
             <groupId>io.github.mooy1</groupId>
             <artifactId>InfinityLib</artifactId>
-            <version>71cff3336d</version>
+            <version>1.1.1</version>
             <scope>compile</scope>
         </dependency>
 
@@ -88,12 +88,22 @@
             <artifactId>SlimeTinker</artifactId>
             <version>609a3c97b0</version>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.github.mooy1</groupId>
+                    <artifactId>InfinityLib</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.bstats</groupId>
+                    <artifactId>bstats-bukkit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
     <build>
         <finalName>${project.name} v${project.version}</finalName>
-        <defaultGoal>clean package -T 2</defaultGoal>
+        <defaultGoal>clean package -T 2.0C</defaultGoal>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <resources>
             <resource>

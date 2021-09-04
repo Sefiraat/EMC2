@@ -1,26 +1,28 @@
 package io.github.seggan.emc2;
 
-import io.github.thebusybiscuit.slimefun4.core.categories.LockedCategory;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import lombok.experimental.UtilityClass;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import io.github.mooy1.infinitylib.core.AbstractAddon;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.items.groups.LockedItemGroup;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class Items {
 
-    public static final Category CATEGORY;
+    public static final ItemGroup CATEGORY;
 
     static {
-        assert SlimefunPlugin.instance() != null;
+        assert Slimefun.instance() != null;
 
-        CATEGORY = new LockedCategory(
-            EMC2.inst().getKey("emc2_category"),
-            new CustomItem(Material.QUARTZ_BRICKS, "EMC2"),
-            new NamespacedKey(SlimefunPlugin.instance(), "electricity")
+        CATEGORY = new LockedItemGroup(
+            AbstractAddon.createKey("emc2_category"),
+            new CustomItemStack(Material.QUARTZ_BRICKS, "EMC2"),
+            new NamespacedKey(Slimefun.instance(), "electricity")
         );
     }
 

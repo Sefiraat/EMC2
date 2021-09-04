@@ -1,19 +1,19 @@
 package io.github.seggan.emc2.items;
 
-import io.github.mooy1.infinitylib.presets.MenuPreset;
+import io.github.mooy1.infinitylib.machines.MenuBlock;
 import io.github.seggan.emc2.Items;
 import io.github.seggan.emc2.qgp.ItemValues;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -34,7 +34,7 @@ public class Rematerializer extends SlimefunItem {
     private static final int ITEM_SLOT = 11;
     private static final int OUTPUT_SLOT = 15;
 
-    private static final ItemStack INPUT_ITEM = new CustomItem(
+    private static final ItemStack INPUT_ITEM = new CustomItemStack(
         Material.BLUE_STAINED_GLASS_PANE,
         "&9Input",
         "",
@@ -42,7 +42,7 @@ public class Rematerializer extends SlimefunItem {
         "&7in the adjacent slot"
     );
 
-    private static final ItemStack ACTION_ITEM = new CustomItem(
+    private static final ItemStack ACTION_ITEM = new CustomItemStack(
         Material.NETHER_STAR,
         "&6Copy",
         "",
@@ -77,10 +77,10 @@ public class Rematerializer extends SlimefunItem {
             @Override
             public boolean canOpen(@Nonnull Block b, @Nonnull Player p) {
                 return p.hasPermission("slimefun.inventory.bypass") ||
-                    SlimefunPlugin.getProtectionManager().hasPermission(
+                    Slimefun.getProtectionManager().hasPermission(
                         p,
                         b.getLocation(),
-                        ProtectableAction.INTERACT_BLOCK
+                        Interaction.INTERACT_BLOCK
                     );
             }
 
@@ -97,7 +97,7 @@ public class Rematerializer extends SlimefunItem {
             preset.addItem(slot, INPUT_ITEM, ChestMenuUtils.getEmptyClickHandler());
         }
         for (int slot : OUTPUT_BORDER) {
-            preset.addItem(slot, MenuPreset.OUTPUT_ITEM, ChestMenuUtils.getEmptyClickHandler());
+            preset.addItem(slot, MenuBlock.OUTPUT_BORDER, ChestMenuUtils.getEmptyClickHandler());
         }
 
         preset.addItem(ACTION_SLOT, ACTION_ITEM);

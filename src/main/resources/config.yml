@@ -1,3 +1,5 @@
+auto-update: true
+
 qgp:
   # When rematerializing, extra QGP will be taken calculated by extra-burn percent of the base value
   extra-burn: 20.0

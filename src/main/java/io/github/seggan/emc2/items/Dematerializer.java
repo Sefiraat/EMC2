@@ -1,23 +1,21 @@
 package io.github.seggan.emc2.items;
 
-import io.github.mooy1.infinitylib.presets.MenuPreset;
-import io.github.mooy1.infinitylib.slimefun.AbstractTickingContainer;
+import io.github.mooy1.infinitylib.machines.MenuBlock;
+import io.github.mooy1.infinitylib.machines.TickingMenuBlock;
 import io.github.seggan.emc2.Items;
 import io.github.seggan.emc2.qgp.ItemValues;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
-import me.mrCookieSlime.Slimefun.api.inventory.DirtyChestMenu;
-import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class Dematerializer extends AbstractTickingContainer {
+public class Dematerializer extends TickingMenuBlock {
 
     private static final int[] BACKGROUND = new int[]{0, 1, 2, 6, 7, 8};
     private static final int[] BORDER = new int[]{3, 5};
@@ -32,7 +30,7 @@ public class Dematerializer extends AbstractTickingContainer {
     }
 
     @Override
-    protected void tick(@Nonnull BlockMenu blockMenu, @Nonnull Block block) {
+    protected void tick(@Nonnull Block block, @Nonnull BlockMenu blockMenu) {
         ItemStack stack = blockMenu.getItemInSlot(INPUT_SLOT);
         if (stack == null || stack.getType().isAir()) return;
 
@@ -53,17 +51,21 @@ public class Dematerializer extends AbstractTickingContainer {
         blockMenu.consumeItem(INPUT_SLOT, 64);
     }
 
-    @Nonnull
     @Override
-    protected int[] getTransportSlots(@Nonnull DirtyChestMenu menu, @Nonnull ItemTransportFlow flow, ItemStack item) {
+    protected void setup(BlockMenuPreset preset) {
+        preset.drawBackground(BACKGROUND);
+        for (int slot : BORDER) {
+            preset.addItem(slot, MenuBlock.INPUT_BORDER, ChestMenuUtils.getEmptyClickHandler());
+        }
+    }
+
+    @Override
+    protected int[] getInputSlots() {
         return new int[]{INPUT_SLOT};
     }
 
     @Override
-    protected void setupMenu(@Nonnull BlockMenuPreset preset) {
-        preset.drawBackground(BACKGROUND);
-        for (int slot : BORDER) {
-            preset.addItem(slot, MenuPreset.INPUT_ITEM, ChestMenuUtils.getEmptyClickHandler());
-        }
+    protected int[] getOutputSlots() {
+        return new int[0];
     }
 }

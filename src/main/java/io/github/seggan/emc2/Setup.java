@@ -1,17 +1,19 @@
 package io.github.seggan.emc2;
 
+import io.github.mooy1.infinitylib.core.AbstractAddon;
 import io.github.seggan.emc2.items.Atomizer;
 import io.github.seggan.emc2.items.Dematerializer;
 import io.github.seggan.emc2.items.QGPCapacitor;
 import io.github.seggan.emc2.items.Rematerializer;
 import io.github.seggan.emc2.items.Router;
-import io.github.thebusybiscuit.slimefun4.core.researching.Research;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
-import lombok.experimental.UtilityClass;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import org.bukkit.inventory.ItemStack;
+
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class Setup {
@@ -69,7 +71,7 @@ public class Setup {
     }
 
     private static void registerResearch(String key, String name, int cost, SlimefunItemStack... items) {
-        Research research = new Research(EMC2.inst().getKey(key), id++, name, cost);
+        Research research = new Research(AbstractAddon.createKey(key), id++, name, cost);
         research.addItems(items);
         research.register();
     }
