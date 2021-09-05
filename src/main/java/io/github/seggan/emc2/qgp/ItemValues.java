@@ -1,6 +1,6 @@
 package io.github.seggan.emc2.qgp;
 
-import io.github.sefiraat.slimetinker.items.templates.ToolTemplate;
+import io.github.sefiraat.slimetinker.utils.ItemUtils;
 import io.github.seggan.emc2.EMC2;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
@@ -282,14 +282,14 @@ public class ItemValues {
     public long getValue(ItemStack stack, boolean rematerializing) {
         if (SlimefunGuide.isGuideItem(stack)) return 0;
 
-        long value = 0;
+        long value;
 
         if (stack.getType() == Material.SPAWNER) return 150;
 
         SlimefunItem slimefunItem = SlimefunItem.getByItem(stack);
         if (slimefunItem != null && !slimefunItem.isUseableInWorkbench()) {
             if (slimefunItem.getAddon().equals(EMC2.inst())) return 0;
-            if (EMC2.inst().isSlimeTinkerInstalled() && ToolTemplate.isTool(stack)) return 0;
+            if (EMC2.inst().isSlimeTinkerInstalled() && ItemUtils.isTinkers(stack)) return 0;
 
             Map<ItemStack, Long> calc = Calculator.calculate(slimefunItem, stack.getAmount());
             for (ItemStack i : calc.keySet()) {
@@ -356,4 +356,5 @@ public class ItemValues {
             }
         }
     }
+
 }

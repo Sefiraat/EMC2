@@ -86,7 +86,7 @@
         <dependency>
             <groupId>com.github.Sefiraat</groupId>
             <artifactId>SlimeTinker</artifactId>
-            <version>609a3c97b0</version>
+            <version>2b3eff0431</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
