@@ -5,8 +5,8 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.WorldMock;
 import be.seeseemelk.mockbukkit.block.BlockMock;
 import io.github.seggan.emc2.items.QGPCapacitor;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -25,13 +25,13 @@ import static org.mockito.ArgumentMatchers.*;
 
 public class TestCaps {
     private static ServerMock server;
-    private static SlimefunPlugin slimefun;
+    private static Slimefun slimefun;
     private static EMC2 emc2;
 
     @BeforeAll
     public static void setUp() {
         server = MockBukkit.mock();
-        slimefun = MockBukkit.load(SlimefunPlugin.class);
+        slimefun = MockBukkit.load(Slimefun.class);
         emc2 = MockBukkit.load(EMC2.class);
     }
 
@@ -68,7 +68,7 @@ public class TestCaps {
                     String id = BlockStorage.getLocationInfo(l, "id");
                     if (id == null) return null;
 
-                    return SlimefunItem.getByID(id);
+                    return SlimefunItem.getById(id);
                 }
             );
 

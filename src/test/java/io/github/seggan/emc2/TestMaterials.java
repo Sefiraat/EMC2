@@ -3,7 +3,7 @@ package io.github.seggan.emc2;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import io.github.seggan.emc2.qgp.ItemValues;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import org.bukkit.Material;
 import org.junit.jupiter.api.AfterAll;
@@ -16,13 +16,13 @@ import java.util.Set;
 public class TestMaterials {
 
     private static ServerMock server;
-    private static SlimefunPlugin slimefun;
+    private static Slimefun slimefun;
     private static EMC2 emc2;
 
     @BeforeAll
     public static void setUp() {
         server = MockBukkit.mock();
-        slimefun = MockBukkit.load(SlimefunPlugin.class);
+        slimefun = MockBukkit.load(Slimefun.class);
         emc2 = MockBukkit.load(EMC2.class);
     }
 
